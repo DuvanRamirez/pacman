@@ -7,7 +7,7 @@ personaje::personaje()
 
 QRectF personaje::boundingRect() const
 {
-    return QRectF(-30,-30,30,30);
+    return QRectF(-15,-15,30,30);
 }
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

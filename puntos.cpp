@@ -7,7 +7,7 @@ puntos::puntos()
 
 QRectF puntos::boundingRect() const
 {
-    return QRectF(-10,-10,7,7);
+    return QRectF(-4,-4,8,8);
 }
 
 void puntos::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

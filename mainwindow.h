@@ -46,7 +46,8 @@ private:
     puntos* punto7;
     puntos* punto8;
     puntos* punto9;
-
+    qreal objetoPosX;
+    qreal objetoPosY;
     QTimer *timer;
 
     int puntuacion;

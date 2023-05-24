@@ -21,8 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
     moverUy1=false;
     moverDy1=false;
 
-    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa2.png")));
 
+    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/Imagenes/maparojo.png")));
+    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa2.png")));
 
     timer=new QTimer();
 
@@ -31,38 +32,42 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer->start(33);
 
-    pacman = new personaje();
+
+
+    pacman = new personaje;
     scene->addItem(pacman);
-    pacman->setPos(330,260);
+    pacman->setPos(325, 244);
+    objetoPosX = pacman->x();
+    objetoPosY = pacman->y();
 
 
     punto = new puntos();
     scene->addItem(punto);
-    punto->setPos(200,350);
+    punto->setPos(127,37);
     punto2 = new puntos();
     scene->addItem(punto2);
-    punto2->setPos(130,38);
+    punto2->setPos(526,37);
     punto3 = new puntos();
     scene->addItem(punto3);
-    punto3->setPos(300,350);
+    punto3->setPos(127,484);
     punto4 = new puntos();
     scene->addItem(punto4);
-    punto4->setPos(350,30);
+    punto4->setPos(526,484);
     punto5 = new puntos();
     scene->addItem(punto5);
-    punto5->setPos(200,100);
+    punto5->setPos(148,244);
     punto6 = new puntos();
     scene->addItem(punto6);
-    punto6->setPos(210,100);
+    punto6->setPos(502,244);
     punto7 = new puntos();
     scene->addItem(punto7);
-    punto7->setPos(50,350);
+    punto7->setPos(326,100);
     punto8 = new puntos();
     scene->addItem(punto8);
-    punto8->setPos(25,30);
+    punto8->setPos(326,385);
     punto9 = new puntos();
     scene->addItem(punto9);
-    punto9->setPos(12,5);
+    punto9->setPos(326,292);
 }
 
 MainWindow::~MainWindow()
@@ -70,28 +75,58 @@ MainWindow::~MainWindow()
     delete scene;
     delete ui;
 }
-
-
 void MainWindow::animar()
 {
+    QImage image(":/Imagenes/maparojo.png");
+    int z=12;
+    if(moverIx1){
+        QRgb pixelValueX = image.pixel(objetoPosX-z, objetoPosY);
+        int r, g, b;
+        QColor color(pixelValueX);
+        color.getRgb(&r, &g, &b);
 
-    if(moverIx1 )
-    {
-        pacman->setPos(pacman->x()-2,pacman->y());
-    }
-    if(moverDx1 )
-    {
-        pacman->setPos(pacman->x()+2,pacman->y());
-    }
-    if(moverUy1 )
-    {
-        pacman->setPos(pacman->x(),pacman->y()-2);
-    }
-    if(moverDy1 )
-    {
-        pacman->setPos(pacman->x(),pacman->y()+2);
-    }
+        if(r==0 && g==0 && b==0 ){
+            pacman->setPos(pacman->x()-2,pacman->y());
+            objetoPosX-=2;
+        }
 
+    }
+    if(moverDx1){
+        QRgb pixelValueX = image.pixel(objetoPosX+z, objetoPosY);
+        int r, g, b;
+        QColor color(pixelValueX);
+        color.getRgb(&r, &g, &b);
+
+        if(r==0 && g==0 && b==0 ){
+            pacman->setPos(pacman->x()+2,pacman->y());
+            objetoPosX+=2;
+        }
+
+    }
+    if(moverUy1){
+        QRgb pixelValueY = image.pixel(objetoPosX, objetoPosY-z);
+        int r, g, b;
+        QColor color(pixelValueY);
+        color.getRgb(&r, &g, &b);
+
+        if(r==0 && g==0 && b==0 ){
+            pacman->setPos(pacman->x(),pacman->y()-2);
+            objetoPosY-=2;
+        }
+
+    }
+    if(moverDy1){
+        QRgb pixelValueY = image.pixel(objetoPosX, objetoPosY+z);
+        int r, g, b;
+        QColor color(pixelValueY);
+        color.getRgb(&r, &g, &b);
+
+        if(r==0 && g==0 && b==0){
+            pacman->setPos(pacman->x(),pacman->y()+2);
+            objetoPosY+=2;
+        }
+
+    }
     if(pacman->collidesWithItem(punto))
     {
         if(punto->isVisible()){
