@@ -2,27 +2,17 @@
 
 personaje::personaje()
 {
-    vy=7;
+
 }
 
 QRectF personaje::boundingRect() const
 {
-    return QRectF(-15,-15,30,30);
+    return QRectF(-18,-18,36,36);
 }
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     QPixmap pixmap;
     pixmap.load(":/Imagenes/pacman.png");
-    painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
-}
-
-void personaje::mover()
-{
-    setPos(x(),y()+vy);
-}
-
-void personaje::choque()
-{
-    vy=-vy/1.3;
+    painter->drawPixmap(-18,-18,pixmap,x_sprite,y_sprite,30,30);
 }

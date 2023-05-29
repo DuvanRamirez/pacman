@@ -2,7 +2,7 @@
 
 puntos::puntos()
 {
-    vy=7;
+
 }
 
 QRectF puntos::boundingRect() const
@@ -17,12 +17,3 @@ void puntos::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
     painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
 }
 
-void puntos::mover()
-{
-    setPos(x(),y()+vy);
-}
-
-void puntos::choque()
-{
-    vy=-vy/1.3;
-}

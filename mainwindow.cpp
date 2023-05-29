@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
     scene=new QGraphicsScene(0,0,650,500);
     ui->graphicsView->setScene(scene);
 
@@ -21,8 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     moverUy1=false;
     moverDy1=false;
 
-
-    ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/Imagenes/maparojo.png")));
     ui->graphicsView->setBackgroundBrush(QBrush(QImage(":/Imagenes/mapa2.png")));
 
     timer=new QTimer();
@@ -79,15 +76,15 @@ void MainWindow::animar()
 {
     QImage image(":/Imagenes/maparojo.png");
     int z=12;
+    int velocidad = 4;
     if(moverIx1){
         QRgb pixelValueX = image.pixel(objetoPosX-z, objetoPosY);
         int r, g, b;
         QColor color(pixelValueX);
         color.getRgb(&r, &g, &b);
-
         if(r==0 && g==0 && b==0 ){
-            pacman->setPos(pacman->x()-2,pacman->y());
-            objetoPosX-=2;
+            pacman->setPos(pacman->x()-velocidad,pacman->y());
+            objetoPosX-=velocidad;
         }
 
     }
@@ -98,8 +95,8 @@ void MainWindow::animar()
         color.getRgb(&r, &g, &b);
 
         if(r==0 && g==0 && b==0 ){
-            pacman->setPos(pacman->x()+2,pacman->y());
-            objetoPosX+=2;
+            pacman->setPos(pacman->x()+velocidad,pacman->y());
+            objetoPosX+=velocidad;
         }
 
     }
@@ -110,8 +107,8 @@ void MainWindow::animar()
         color.getRgb(&r, &g, &b);
 
         if(r==0 && g==0 && b==0 ){
-            pacman->setPos(pacman->x(),pacman->y()-2);
-            objetoPosY-=2;
+            pacman->setPos(pacman->x(),pacman->y()-velocidad);
+            objetoPosY-=velocidad;
         }
 
     }
@@ -122,8 +119,8 @@ void MainWindow::animar()
         color.getRgb(&r, &g, &b);
 
         if(r==0 && g==0 && b==0){
-            pacman->setPos(pacman->x(),pacman->y()+2);
-            objetoPosY+=2;
+            pacman->setPos(pacman->x(),pacman->y()+velocidad);
+            objetoPosY+=velocidad;
         }
 
     }
@@ -241,7 +238,6 @@ void MainWindow::aumentarPunt()
 {
     puntuacion += 1;
     ui->lcdNumber->display(puntuacion);
-    std::cout<<puntuacion<<std::endl;
 }
 
 

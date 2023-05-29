@@ -11,9 +11,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter,
        const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void mover();
-    void choque();
-    int vy;
+
 };
 
 #endif // PUNTOS_H
